@@ -1,17 +1,33 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import YTSearch from 'youtube-api-search';
 
-// path reference as this is a file we have created
 import SearchBar from './components/search_bar';
 
 const API_KEY = 'AIzaSyAT3JscCLJsscSW7McUF8KSBeSFgplL-Sg';
 
-const App = () => {
-  return (
-  <div>
-    <SearchBar />
-  </div>
-  );
+//when the application boots, we get an instance of app
+class App extends Component {
+  //the constructor runs right away, and kicks off a search
+  //with the term 'surfboards'
+  constructor(props) {
+    super(props);
+
+    this.state = { videos : [] };
+
+    //the callback function(data) will be called with a list of videos
+    YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
+      this.setState({ videos });
+    });
+  }
+
+  render () {
+    return (
+    <div>
+      <SearchBar />
+    </div>
+    );
+  }
 }
 
 ReactDOM.render(<App />, document.querySelector('.container'));
