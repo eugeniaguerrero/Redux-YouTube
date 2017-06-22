@@ -16,7 +16,7 @@ class App extends Component {
     this.state = { videos : [] };
 
     //the callback function(data) will be called with a list of videos
-    YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
+    YTSearch({key: API_KEY, term: 'gardening'}, (videos) => {
       this.setState({ videos });
     });
   }
